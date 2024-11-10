@@ -1,0 +1,77 @@
+/* General Styling for Vehicle Inspection Form */
+.inspection-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inspection-form h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .inspection-form div {
+    margin-bottom: 15px;
+  }
+  
+  .inspection-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .inspection-form input,
+  .inspection-form select,
+  .inspection-form textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .inspection-form textarea {
+    resize: vertical;
+  }
+  
+  .inspection-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .inspection-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .inspection-form input:focus,
+  .inspection-form select:focus,
+  .inspection-form textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  .inspection-form input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .inspection-form {
+      padding: 15px;
+    }
+  
+    .inspection-form button {
+      font-size: 14px;
+    }
+  }
+  

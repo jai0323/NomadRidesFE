@@ -1,81 +1,103 @@
-import React from 'react';
-import SearchBar from '../components/SearchBar';
-import BikeCard from '../components/BikeCard';
-import CarCard from '../components/CarCard';
-import image1 from '../assets/mountainBike.jpeg';
-import image2 from '../assets/roadBike.jpeg';
-import car1 from '../assets/car1.jpeg';
-import car2 from '../assets/car2.jpeg';
-import HeroSection from '../components/HeroSection';
+import React from "react";
+
+import HeroSlider from "../components/UI/HeroSlider";
+import Helmet from "../components/Helmet/Helmet";
+
+import { Container, Row, Col } from "reactstrap";
+import FindCarForm from "../components/UI/FindCarForm";
+import AboutSection from "../components/UI/AboutSection";
+import ServicesList from "../components/UI/ServicesList";
+import carData from "../assets/data/carData";
+import CarItem from "../components/UI/CarItem";
+import BecomeVendorSection from "../components/UI/BecomeVendorSection";
+import Testimonial from "../components/UI/Testimonial";
+
+import BlogList from "../components/UI/BlogList";
+
 const Home = () => {
-const bikes = [
-   { id: 1,
-    name: 'Mountain Bike',
-    image: image1,
-    description: 'A rugged bike for off-road adventures.',
-    price: 600
-  },
-  {
-    id: 2,
-    name: 'Road Bike',
-    image: image2,
-    description: 'A sleek bike for long-distance rides.',
-    price: 300
-  },
-  {
-    id: 3,
-    name: 'Sports Bike',
-    image: image2,
-    description: 'A sleek bike for long-distance rides.',
-    price: 300
-  },
-  ];
-  const cars = [
-    // Car data
-    {
-        id: 1,
-        name: 'Sedan',
-        image: car1,
-        description: 'A comfortable and fuel-efficient car.',
-        price: 1500
-      },
-      {
-        id: 2,
-        name: 'SUV',
-        image: car1,
-        description: 'A spacious and versatile vehicle.',
-        price: 1000
-      },
-      {
-        id: 2,
-        name: 'Sports Car',
-        image: car2,
-        description: 'A spacious and versatile vehicle.',
-        price: 1000
-      },
-  ];
-
   return (
-    <>
-    <div className=" w-lvw">
-      <HeroSection />
-      <div className='px-5'>
-        <h2 className="text-2xl font-bold mt-4 ">Bikes</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-           {bikes.map((bike) => (
-            <BikeCard bike={bike} key={bike.id} />
-          ))}
-        </div>
-        <h2 className="text-2xl font-bold mt-4">Cars</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cars.map((car) => (
-            <CarCard car={car} key={car.id} />
-          ))}
-        </div> 
+    <Helmet title="Home">
+      {/* ============= hero section =========== */}
+      <section className="p-0 hero__slider-section">
+        <HeroSlider />
 
-      </div>
-    </div>
-    </>
+        <div className="hero__form">
+          <Container >
+            <Row className="form__row">
+              <Col lg="4" md="4">
+                <div className="find__cars-left">
+                  <h2>Find your vehicle here</h2>
+                </div>
+              </Col>
+
+              <Col lg="8" md="8" sm="12">
+                <FindCarForm />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </section>
+      {/* =========== about section ================ */}
+      <AboutSection />
+      {/* ========== services section ============ */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="mb-5 text-center">
+              <h6 className="section__subtitle">See our</h6>
+              <h2 className="section__title">Popular Services</h2>
+            </Col>
+
+            <ServicesList />
+          </Row>
+        </Container>
+      </section>
+      {/* =========== car offer section ============= */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="text-center mb-5">
+              <h6 className="section__subtitle">Come with</h6>
+              <h2 className="section__title">Hot Offers</h2>
+            </Col>
+
+            {carData.slice(0, 6).map((item) => (
+              <CarItem item={item} key={item.id} />
+            ))}
+          </Row>
+        </Container>
+      </section>
+      {/* =========== become a driver section ============ */}
+      <BecomeVendorSection />
+
+      {/* =========== testimonial section =========== */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="mb-4 text-center">
+              <h6 className="section__subtitle">Our clients says</h6>
+              <h2 className="section__title">Testimonials</h2>
+            </Col>
+
+            <Testimonial />
+          </Row>
+        </Container>
+      </section>
+
+      {/* =============== blog section =========== */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="mb-5 text-center">
+              <h6 className="section__subtitle">Explore our blogs</h6>
+              <h2 className="section__title">Latest Blogs</h2>
+            </Col>
+
+            <BlogList />
+          </Row>
+        </Container>
+      </section>
+    </Helmet>
   );
 };
 

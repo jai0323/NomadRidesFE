@@ -1,60 +1,97 @@
 import React, { useState } from 'react';
-import './login.css'; // Import your CSS file
-import logo from '../assets/logo.png'
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
+import '../styles/login.css';
+import { Navigate } from "react-router-dom";
+import HeroSlider2 from '../components/UI/HeroSlider2';
 
-const Login = ({setDetails}) =>{
-    const [isLoginFormActive, setIsLoginFormActive] = useState(true);
-    const [visible, setVisible] = useState(true);
-    const [visibleFrom, setVisibleFrom] = useState(true);
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('customer'); // Default role
 
-    const toggleForm = () => {
-      
-      setIsLoginFormActive(!isLoginFormActive);
-      setTimeout(() => {
-        setVisible(!visible)
-      }, 500);
-     
-    };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Handle login logic here, e.g., API call to authenticate the user
+    console.log("Login successful", { email, password, role });
+  };
   
-    return (
-      <div className='bg-[#000] w-screen h-screen flex justify-center items-center'> 
-      <div className={`wrapper ${isLoginFormActive ? '' : 'active'}`}>
-        <span className="rotate-bg"></span>
-        <span className="rotate-bg2"></span>
-  
-        {visible ? (
-          <>
+  const gotoRegister=()=>{
+    Navigate('/register');
+  }
+  return (
+    <>
+      <div className="login-container">
+        <HeroSlider2 />
+        <div className="login-form">
+          <h2>Login </h2>
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
             
-              <LoginForm toggleForm={toggleForm} setDetails={setDetails}/>
-            <div className="info-text login">
-              <h2 className="animation text-white text-3xl font-bold" style={{ '--i': 0, '--j': 20 }}>
-                  <img src={logo} alt="LOGO" className='w-50'/>               
-              </h2>
-              {/* <p className="animation" style={{ '--i': 1, '--j': 21 }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p> */}
+            {/* Role Selection */}
+            <div className="form-group role-selection">
+              <label>Select Role:</label>
+              <div>
+                <input
+                  type="radio"
+                  id="customer"
+                  name="role"
+                  value="customer"
+                  checked={role === 'customer'}
+                  onChange={() => setRole('customer')}
+                />
+                <label htmlFor="customer" className='op'>Customer</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="vendor"
+                  name="role"
+                  value="vendor"
+                  checked={role === 'vendor'}
+                  onChange={() => setRole('vendor')}
+                />
+                <label htmlFor="vendor" className='op'>Vendor</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="admin"
+                  name="role"
+                  value="admin"
+                  checked={role === 'admin'}
+                  onChange={() => setRole('admin')}
+                />
+                <label htmlFor="admin" className='op'>Admin</label>
+              </div>
             </div>
-          </>
-        ) : (
-          <>
-            {
-              visibleFrom &&
-              <RegisterForm toggleForm={toggleForm}  setDetails={setDetails}/>}
-            <div className="info-text register">
-              <h2 className="animation  text-white text-3xl font-bold " style={{ '--i': 17, '--j': 0 }}>
-                  <img src={logo} alt="LOGO" className='w-50'/>
-              </h2>
-              {/* <p className="animation" style={{ '--i': 18, '--j': 1 }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p> */}
+
+            <div className="button-container">
+              <button type="submit" className="login-button">Login</button>
+                <button type="button" className="register-button" onClick={gotoRegister}>Register</button>
             </div>
-          </>
-        )}
+          </form>
+        </div>
       </div>
-      </div>
-    );
-}
+    </>
+  );
+};
 
 export default Login;
