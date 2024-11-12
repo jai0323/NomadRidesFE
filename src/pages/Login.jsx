@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import '../styles/login.css';
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import HeroSlider2 from '../components/UI/HeroSlider2';
+import { signin } from '../util/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('customer'); // Default role
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+   const handleLogin = async(e) => {
+    
     e.preventDefault();
-    // Handle login logic here, e.g., API call to authenticate the user
-    console.log("Login successful", { email, password, role });
+    let response = await signin(email, password,role);
+    console.log("Login ", response);
+
+    if(response.message=='signin successful'){
+      alert("Signin Successful");
+      navigate('/home');
+    }
+    else if(response.error=='not found'){
+      alert(response.message);
+    }
+    else if(response.message=='invalid password'){
+      alert("Invalid Password");
+    }
+    else{
+      alert("Something went wrong");
+    }
   };
   
   const gotoRegister=()=>{
@@ -21,11 +38,11 @@ const Login = () => {
     <>
       <div className="login-container">
         <HeroSlider2 />
-        <div className="login-form">
-          <h2>Login </h2>
+        <div className="login-form ">
+          <h2 className=''>Login </h2>
           <form onSubmit={handleLogin}>
             <div className="form-group">
-              <label>Email</label>
+              <label className='text-white'>Email</label>
               <input
                 type="email"
                 value={email}
@@ -35,7 +52,7 @@ const Login = () => {
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label className='text-white'>Password</label>
               <input
                 type="password"
                 value={password}
@@ -47,8 +64,8 @@ const Login = () => {
             
             {/* Role Selection */}
             <div className="form-group role-selection">
-              <label>Select Role:</label>
-              <div>
+              <label className='text-white'>Select Role:</label>
+              <div >
                 <input
                   type="radio"
                   id="customer"
@@ -56,8 +73,9 @@ const Login = () => {
                   value="customer"
                   checked={role === 'customer'}
                   onChange={() => setRole('customer')}
+                  
                 />
-                <label htmlFor="customer" className='op'>Customer</label>
+                <label htmlFor="customer" className='op text-white'>Customer</label>
               </div>
               <div>
                 <input
@@ -68,7 +86,7 @@ const Login = () => {
                   checked={role === 'vendor'}
                   onChange={() => setRole('vendor')}
                 />
-                <label htmlFor="vendor" className='op'>Vendor</label>
+                <label htmlFor="vendor" className='op text-white'>Vendor</label>
               </div>
               <div>
                 <input
@@ -79,7 +97,7 @@ const Login = () => {
                   checked={role === 'admin'}
                   onChange={() => setRole('admin')}
                 />
-                <label htmlFor="admin" className='op'>Admin</label>
+                <label htmlFor="admin" className='op text-white'>Admin</label>
               </div>
             </div>
 

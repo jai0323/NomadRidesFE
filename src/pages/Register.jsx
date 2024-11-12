@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import "../styles/register.css"; 
 import HeroSlider2 from '../components/UI/HeroSlider2'
+import { signup } from "../util/api";
 function RegistrationPage() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone:"",
     password: "",
     confirmPassword: ""
   });
@@ -15,11 +17,24 @@ function RegistrationPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (formData.password === formData.confirmPassword) {
-      // Handle form submission
-      console.log("Registration Successful", formData);
+      const response = signup(formData);
+      if(response.message=='signup successful'){
+        alert("Signup Successful");
+        navigate('/home');
+      }
+      else if(response.error){
+        alert(response.error);
+      }
+      else if(response.message=='invalid password'){
+        alert("Invalid Password");
+      }
+      else{
+        alert("Something went wrong");
+      }
+      console.log("Registration ", response.error);
     } else {
       alert("Passwords do not match!");
     }
@@ -30,9 +45,9 @@ function RegistrationPage() {
     <div className="registration-container">
       <HeroSlider2/>
       <form onSubmit={handleSubmit} className="registration-form">
-      <h2>Register</h2>
+      <h2 className="">Register</h2>
         <div className="form-group">
-          <label>Full Name:</label>
+          <label className="text-white">Full Name:</label>
           <input
             type="text"
             name="fullName"
@@ -42,7 +57,7 @@ function RegistrationPage() {
           />
         </div>
         <div className="form-group">
-          <label>Email:</label>
+          <label className="text-white">Email:</label>
           <input
             type="email"
             name="email"
@@ -52,7 +67,17 @@ function RegistrationPage() {
           />
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label className="text-white">Phone:</label>
+          <input
+            type="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="text-white">Password:</label>
           <input
             type="password"
             name="password"
@@ -62,7 +87,7 @@ function RegistrationPage() {
           />
         </div>
         <div className="form-group">
-          <label>Confirm Password:</label>
+          <label className="text-white">Confirm Password:</label>
           <input
             type="password"
             name="confirmPassword"
@@ -71,7 +96,7 @@ function RegistrationPage() {
             required
           />
         </div>
-        <button type="submit" className="register-button">Register</button>
+        <button type="submit" className="register-button  ">Register</button>
       </form>
     </div>
     

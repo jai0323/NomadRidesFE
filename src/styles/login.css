@@ -32,7 +32,7 @@ h2{
   width: 100%;
   max-width: 400px;
   padding: 20px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
    /* Semi-transparent background */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
