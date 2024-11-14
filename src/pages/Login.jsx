@@ -36,6 +36,8 @@ const Login = () => {
   const gotoRegister=()=>{
     Navigate('/register');
   }
+
+  
   return (
     <>
       <div className="login-container">
@@ -104,7 +106,7 @@ const Login = () => {
             </div>
 
             <div className="button-container">
-              <button type="submit" className="login-button">Login</button>
+              <button type="submit" className="login-button" >Login</button>
                 <button type="button" className="register-button" onClick={gotoRegister}>Register</button>
             </div>
           </form>

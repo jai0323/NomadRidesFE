@@ -21,52 +21,34 @@ const BookingForm = () => {
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
         <input type="number" placeholder="Phone Number" />
       </FormGroup>
-
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="text" placeholder="From Address" />
+        <input type="date" placeholder="Journey Start Date" />
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <input type="text" placeholder="To Address" />
+        <input type="date" placeholder="Journey End Date" />
       </FormGroup>
-
-      <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <select name="" id="">
-          <option value="1 person">1 Person</option>
-          <option value="2 person">2 Person</option>
-          <option value="3 person">3 Person</option>
-          <option value="4 person">4 Person</option>
-          <option value="5+ person">5+ Person</option>
-        </select>
-      </FormGroup>
-      <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <select name="" id="">
-          <option value="1 luggage">1 luggage</option>
-          <option value="2 luggage">2 luggage</option>
-          <option value="3 luggage">3 luggage</option>
-          <option value="4 luggage">4 luggage</option>
-          <option value="5+ luggage">5+ luggage</option>
-        </select>
-      </FormGroup>
-
-      <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        <input type="date" placeholder="Journey Date" />
-      </FormGroup>
-      <FormGroup className="booking__form d-inline-block ms-1 mb-4">
-        <input
-          type="time"
-          placeholder="Journey Time"
-          className="time__picker"
-        />
-      </FormGroup>
-
-      <FormGroup>
-        <textarea
-          rows={5}
-          type="textarea"
-          className="textarea"
-          placeholder="Write"
-        ></textarea>
-      </FormGroup>
+      <FormGroup className=" flex gap-4 text-[#5e5d5d]">
+      <label>
+        <input type="radio" name="insurance" value="199" /> Insurance at ₹99
+      </label>
+      <label>
+        <input type="radio" name="insurance" value="299" /> Insurance at ₹199
+      </label>
+    </FormGroup>
+    <FormGroup className="flex flex-col gap-4 border border-[#c2c1c1] p-4">
+      <div className="flex w-full justify-between">
+        <label>Discount 10%</label>
+        <label>- ₹99</label>
+      </div>
+      <div className="flex w-full justify-between">
+        <label>Insurance</label>
+        <label>₹99</label>
+      </div>
+      <div className="flex w-full justify-between border-t pt-3">
+        <label>Amount</label>
+        <label>₹1999</label>
+      </div>
+    </FormGroup>
     </Form>
   );
 };
