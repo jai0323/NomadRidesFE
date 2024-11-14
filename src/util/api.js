@@ -16,7 +16,8 @@ export async function signup( formData ) {
     try {
         const response = await axios.post(`${BACKEND_URL}/customerSignup`, {email:formData.email, password:formData.password, name:formData.fullName, phone:formData.phone});
         return response.data;
-    } catch (error) {
-        return error.response.data;
+    } catch (err) {
+        console.log("api log 20:=",err.response.data.error)
+        return err.response.data;
     }
 }

@@ -1,4 +1,4 @@
-import React, {useRef } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
@@ -34,10 +34,32 @@ const navLinks = [
 
 const Header = () => {
   const menuRef = useRef(null);
-
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  // Check if a user is logged in on initial render
   
-  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    };
+
+    // Add event listeners for both the custom event and `storage` event
+    window.addEventListener("storageChange", handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+
+    // Cleanup listeners on component unmount
+    return () => {
+      window.removeEventListener("storageChange", handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    window.dispatchEvent(new Event("storageChange"));
+  };
 
   return (
     <header className="header">
@@ -55,20 +77,28 @@ const Header = () => {
             </Col>
 
             <Col lg="6" md="6" sm="6">
-              <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                
-              <Link to="/pup" className=" d-flex align-items-center gap-1"  >
-                  <i class="ri-login-circle-line"></i> Admin
+            {user ? (
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <Link to="" className="d-flex align-items-center gap-1">
+                    {user.name}
                   </Link>
-                <Link to="/login" className=" d-flex align-items-center gap-1"  >
-                  <i class="ri-login-circle-line"></i> Login
+                  <button  onClick={handleLogout} className="d-flex align-items-center gap-1 rounded-md">
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <Link to="/pup" className="d-flex align-items-center gap-1">
+                    <i className="ri-login-circle-line"></i> Admin
                   </Link>
-                  
-                <Link to="/register" className=" d-flex align-items-center gap-1" >
-                  <i class="ri-user-line"></i> Register
-                </Link>
-  
-              </div>
+                  <Link to="/login" className="d-flex align-items-center gap-1">
+                    <i className="ri-login-circle-line"></i> Login
+                  </Link>
+                  <Link to="/register" className="d-flex align-items-center gap-1">
+                    <i className="ri-user-line"></i> Register
+                  </Link>
+                </div>
+              )}
             </Col>
           </Row>
         </Container>

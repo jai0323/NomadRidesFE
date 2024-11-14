@@ -20,7 +20,8 @@ function RegistrationPage() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if (formData.password === formData.confirmPassword) {
-      const response = signup(formData);
+      const response = await signup(formData);
+      console.log("Registration ", response);
       if(response.message=='signup successful'){
         alert("Signup Successful");
         navigate('/home');
@@ -28,14 +29,11 @@ function RegistrationPage() {
       else if(response.error){
         alert(response.error);
       }
-      else if(response.message=='invalid password'){
-        alert("Invalid Password");
-      }
       else{
         alert("Something went wrong");
       }
-      console.log("Registration ", response.error);
-    } else {
+    } 
+    else {
       alert("Passwords do not match!");
     }
   };

@@ -14,10 +14,12 @@ const Login = () => {
     
     e.preventDefault();
     let response = await signin(email, password,role);
-    console.log("Login ", response);
+    console.log("Login ", response.user);
 
     if(response.message=='signin successful'){
       alert("Signin Successful");
+      localStorage.setItem("user", JSON.stringify(response.user));
+      window.dispatchEvent(new Event("storageChange"));
       navigate('/home');
     }
     else if(response.error=='not found'){
