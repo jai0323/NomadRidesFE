@@ -20,7 +20,12 @@ const Login = () => {
       alert("Signin Successful");
       localStorage.setItem("user", JSON.stringify(response.user));
       window.dispatchEvent(new Event("storageChange"));
-      navigate('/home');
+      if(role=='customer')
+        navigate('/home');
+      else if(role=='admin')
+        navigate('/admin');       
+      else if(role=='vendor')
+        navigate('/vendor');
     }
     else if(response.error=='not found'){
       alert(response.message);

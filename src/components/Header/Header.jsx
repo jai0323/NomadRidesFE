@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../../styles/header.css";
 import logo from "../../assets/all-images/nomadlogo.png";
 
@@ -33,6 +33,7 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const navigate = useNavigate()
   const menuRef = useRef(null);
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -59,6 +60,7 @@ const Header = () => {
     localStorage.removeItem("user");
     setUser(null);
     window.dispatchEvent(new Event("storageChange"));
+    navigate('/home');
   };
 
   return (
