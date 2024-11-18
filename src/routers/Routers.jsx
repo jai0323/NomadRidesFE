@@ -20,6 +20,7 @@ import VehicleIncidentReportForm from '../pages/VehicleManagementModule/VehicleI
 import VehicleInspectionForm from '../pages/VehicleManagementModule/VehicleInspectionForm'
 import VehicleAvailabilityForm from '../pages/VehicleManagementModule/VehicleAvailabilityForm'
 import ProfileUpdatePage from '../pages/ProfileUpdatePage'
+import VendorPage from '../pages/VendorPage'
 const Routers = () => {
   return (
     <Routes>
@@ -34,6 +35,7 @@ const Routers = () => {
         <Route path='/blogs/:slug' element={<BlogDetails/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
+        <Route path='/vendor' element={<VendorPage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/vrp' element={<VehicleRegistrationPage/>}/>

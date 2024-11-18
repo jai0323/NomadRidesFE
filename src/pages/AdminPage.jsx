@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/adminpage.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { kyc_list, kyc_status_update } from '../util/api';  // Assuming kyc_list is a function to fetch KYC data
 
 const AdminPage = () => {
 
+  const navigate = useNavigate();
   const [carList, setCarList] = useState([]);
   const [bikeList, setBikeList] = useState([]);
   const [vendorKYCList, setVendorKYCList] = useState([]);
@@ -27,7 +28,7 @@ const AdminPage = () => {
 
   const handleApproveKYC = async(user_type, id, status) => {
     
-    console.log(status,"----",user_type,"---",id)
+   console.log(status,"----",user_type,"---",id)
    const kyc_status = await kyc_status_update(user_type,id,status);
    alert(kyc_status.message);
 
@@ -45,6 +46,12 @@ const AdminPage = () => {
 
   useEffect(() => {
     
+    const user =localStorage.getItem('user');
+    if(user?.email!='admin@gmail.com' || !user)
+    {
+      navigate('/login');
+    }
+
 
     fetchData();
   }, []);  // Empty dependency array ensures it runs only once
