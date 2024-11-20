@@ -16,6 +16,7 @@ const VehicleRegistrationForm = () => {
     type: "",
     fuel_type: "",
     photo: "",
+    amount: "",
   });
   const [imageFile, setImageFile] = useState(null);
 
@@ -52,24 +53,25 @@ const VehicleRegistrationForm = () => {
     const vendor = JSON.parse(localStorage.getItem("user"));
   
     // Create a FormData object
-    // const data = new FormData();
-    // data.append('vendor_id', vendor.id);
-    // data.append('vehicleType', formData.vehicleType);
-    // data.append('brand', formData.brand);
-    // data.append('model', formData.model);
-    // data.append('registration_date', formData.registration_date);
-    // data.append('registration_no', formData.registration_no);
-    // data.append('last_service_date', formData.last_service_date);
-    // data.append('type', formData.type);
-    // data.append('fuel_type', formData.fuel_type);
+    const data = new FormData();
+    data.append('vendor_id', vendor.id);
+    data.append('vehicleType', formData.vehicleType);
+    data.append('brand', formData.brand);
+    data.append('model', formData.model);
+    data.append('registration_date', formData.registration_date);
+    data.append('registration_no', formData.registration_no);
+    data.append('last_service_date', formData.last_service_date);
+    data.append('type', formData.type);
+    data.append('fuel_type', formData.fuel_type);
+    data.append('amount', formData.amount);
   
-    // if (imageFile) {
-    //   data.append('photo', imageFile); // Append the file directly
-    // }
+    if (imageFile) {
+      data.append('photo', imageFile); // Append the file directly
+    }
   
     try {
       formData.vendor_id = vendor.id;
-      const response = await addVehicle(formData, formData.vehicleType); // API call
+      const response = await addVehicle(data, formData.vehicleType); // API call
       if (response?.message) {
         alert(response.message);
         navigate("/vendor");
@@ -152,6 +154,17 @@ const VehicleRegistrationForm = () => {
           type="date"
           name="last_service_date"
           value={formData.last_service_date}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div>
+        <label>Amount :</label>
+        <input
+          type="text"
+          name="amount"
+          value={formData.amount}
           onChange={handleChange}
           required
         />

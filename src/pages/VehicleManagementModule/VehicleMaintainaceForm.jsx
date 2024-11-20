@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "../../styles/vehicle-maintenance.css"
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { Buffer } from 'buffer';
+import { updateVehicle } from "../../util/api";
 const VehicleMaintenanceForm = () => {
   const location = useLocation();
   const vehicle = location.state?.vehicle;
   const type = location.state?.type;
-  // console.log(vehicle.photo)
+  
+  console.log(vehicle.photo)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     vehicleType: type,
@@ -17,8 +19,10 @@ const VehicleMaintenanceForm = () => {
     last_service_date:new Date(vehicle.last_service_date).toISOString().split('T')[0],
     type: vehicle.type,
     fuel_type: vehicle.fuel_type,
-    photo: vehicle.photo,
+    photo: '',
+    amount: vehicle.amount,
   });
+  const bufferData = new Uint8Array(vehicle.photo?.data)
   const [imageFile, setImageFile] = useState(null);
 
   // Handle image file selection and convert to Base64
@@ -51,12 +55,25 @@ const VehicleMaintenanceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const vendor = JSON.parse(localStorage.getItem("user"));
+    // const vendor = JSON.parse(localStorage.getItem("user"));
+    const data = new FormData();
+    data.append('vehicleType', formData.vehicleType);
+    data.append('brand', formData.brand);
+    data.append('model', formData.model);
+    data.append('registration_date', formData.registration_date);
+    data.append('registration_no', formData.registration_no);
+    data.append('last_service_date', formData.last_service_date);
+    data.append('type', formData.type);
+    data.append('fuel_type', formData.fuel_type);
+    data.append('amount', formData.amount);
   
+    if (imageFile) {
+      data.append('photo', imageFile); // Append the file directly
+    }
+   
     
     try {
-      formData.vendor_id = vendor.id;
-      const response = await addVehicle(formData, formData.vehicleType); // API call
+      const response = await updateVehicle(data, formData.vehicleType); // API call
       if (response?.message) {
         alert(response.message);
         navigate("/vendor");
@@ -82,6 +99,7 @@ const VehicleMaintenanceForm = () => {
           name="vehicleType"
           value={formData.vehicleType}
           onChange={handleChange}
+          disabled
         >
           <option value="Car">Car</option>
           <option value="Bike">Bike</option>
@@ -119,6 +137,7 @@ const VehicleMaintenanceForm = () => {
           value={formData.registration_no}
           onChange={handleChange}
           required
+          disabled
         />
       </div>
 
@@ -144,6 +163,16 @@ const VehicleMaintenanceForm = () => {
         />
       </div>
 
+      <div>
+        <label>Amount :</label>
+        <input
+          type="text"
+          name="amount"
+          value={formData.amount}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
       <div>
         <label>Type:</label>
@@ -202,11 +231,16 @@ const VehicleMaintenanceForm = () => {
         />
       </div>
       
-      {vehicle.photo && (
+      {!formData.photo && (
         <div className="flex flex-col justify-center items-center gap-4">
           <h5 className="text-left w-full">Image Preview:</h5>
-          <img src={formData.photo} alt="Preview" style={{ width: '200px', height: 'auto' }} />
-
+          <img src={`data:image/png;base64,${Buffer.from(bufferData).toString('base64')}`} alt="" style={{ width: '200px', height: 'auto' }} />
+        </div>
+      )}
+      {formData.photo && (
+        <div className="flex flex-col justify-center items-center gap-4">
+          <h5 className="text-left w-full">Image Preview:</h5>
+          <img src={`data:image/png;base64,${formData.photo}`} alt="" style={{ width: '200px', height: 'auto' }} />
         </div>
       )}
 

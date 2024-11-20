@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import HeroSlider from "../components/UI/HeroSlider";
 import Helmet from "../components/Helmet/Helmet";
@@ -13,8 +13,29 @@ import BecomeVendorSection from "../components/UI/BecomeVendorSection";
 import Testimonial from "../components/UI/Testimonial";
 
 import BlogList from "../components/UI/BlogList";
+import { vehicleList } from "../util/api";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [carList, setCarList] = useState([]);
+  const [bikeList, setBikeList] = useState([]);
+
+  const fetchData = async () => {
+    const response1 = await vehicleList();
+    setBikeList(response1?.listofbike || []);
+    setCarList(response1?.listofcar || []);
+    // console.log(response1?.listofbike)
+  };
+  
+  
+  useEffect(()=>{
+  
+    fetchData();
+  },[])
+
   return (
     <Helmet title="Home">
       {/* ============= hero section =========== */}
@@ -61,7 +82,22 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {carData.slice(0, 6).map((item) => (
+            {bikeList.slice(0, 6).map((item) => (
+              <CarItem item={item} key={item.id} />
+            ))}
+          </Row>
+        </Container>
+      </section>
+      {/* =========== bike offer section ============= */}
+      <section>
+        <Container>
+          <Row>
+            <Col lg="12" className="text-center mb-5">
+              <h6 className="section__subtitle">Come with</h6>
+              <h2 className="section__title">Hot Offers</h2>
+            </Col>
+
+            {carList.slice(0, 6).map((item) => (
               <CarItem item={item} key={item.id} />
             ))}
           </Row>

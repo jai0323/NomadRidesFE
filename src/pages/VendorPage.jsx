@@ -37,7 +37,7 @@ const VendorPage = () => {
   const fetchData = async () => {
     const vendor = JSON.parse(localStorage.getItem("user"));
     const response = await vehicleList(vendor.id);
-    // console.log(response.listofbike)
+    console.log(response.listofbike)
     // Assuming the API response has customerPendingKyc and vendorPendingKyc
     setBikeList(response?.listofbike || []);
     setCarList(response?.listofcar || []);
@@ -80,7 +80,7 @@ const VendorPage = () => {
           ))}
         </ul>
       </div>
-
+      <hr className='mb-5 py-1 rounded-full bg-slate-900'/>
       {/* Vendor KYC Section */}
       <div className="section">
       <h2 className='font-semibold'>List of Cars</h2>
@@ -98,7 +98,7 @@ const VendorPage = () => {
           ))}
         </ul>
       </div>
-
+      <hr className='mb-5 py-1 rounded-full bg-slate-900'/>
 
     </div>
   );

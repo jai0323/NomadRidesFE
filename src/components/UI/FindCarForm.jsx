@@ -4,34 +4,52 @@ import { Form, FormGroup } from "reactstrap";
 
 const FindCarForm = () => {
   const [vehicleType, setVehicleType] = useState('car');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
 
   const handleVehicleChange = (e) => {
     setVehicleType(e.target.value);
   };
+
+  const onSubmit =  (e) => {
+    e.preventDefault()
+    console.log(from)
+    console.log(to)
+    console.log(vehicleType)
+  }
+
   return (
-    <Form className="form">
+    <Form onSubmit={onSubmit} className="form" >
       <div className=" d-flex align-items-center justify-content-between flex-wrap">
         <FormGroup className="form__group">
-          <input type="text" placeholder="From address" required />
+          <label htmlFor="">Form</label>
+          <input 
+            type="date" 
+            value={from}
+            onChange={(e)=>setFrom(e.target.value)}
+            required 
+          />
         </FormGroup>
-
         <FormGroup className="form__group">
-          <input type="text" placeholder="To address" required />
-        </FormGroup>
-
-        <FormGroup className="form__group">
-          <input type="date" placeholder="Journey date" required />
+        <label htmlFor="">To</label>
+          <input 
+            type="date" 
+            value={to}
+            onChange={(e)=>setTo(e.target.value)}
+            required 
+          />
         </FormGroup>
 
         <FormGroup className="select__group">
+        <label htmlFor="">Vehicle type</label>
           <select onChange={handleVehicleChange} value={vehicleType}>
-            <option value="car"> Car</option>
             <option value="bike">Bike</option>
+            <option value="car"> Car</option>
           </select>
         </FormGroup>
 
         <FormGroup className="form__group">
-          <button className="btn find__car-btn">
+          <button type="submit" className="btn find__car-btn">
             {vehicleType === 'car' ? 'Find Car' : 'Find Bike'}</button>
         </FormGroup>
       </div>
