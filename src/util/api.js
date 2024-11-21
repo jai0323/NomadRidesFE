@@ -37,6 +37,31 @@ export async function kyc( formData, role ) {
 }
 
 
+//get vehicle
+export async function getVehicle( registration_no, type ) {
+    console.log(registration_no,"--", type)
+    try {
+        const response = await axios.post(`${BACKEND_URL}/getVehicle`, {registration_no:registration_no,  type:type});
+        return response.data;
+    } catch (err) {
+        console.log("api log 20:=",err.response.data.error);
+        return err.response.data;
+    }
+}
+
+//get vehicle
+export async function booking( formData ) {
+    console.log(formData,"--")
+    try {
+        const response = await axios.post(`${BACKEND_URL}/booking`, formData);
+        return response.data;
+    } catch (err) {
+        console.log("api log 20:=",err.response.data.error);
+        return err.response.data;
+    }
+}
+
+
 //----------------------------------------------- VENDOR API's ---------------------------------------------------------
 
 //Vendor Signup API

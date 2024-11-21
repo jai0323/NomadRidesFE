@@ -83,7 +83,7 @@ const Home = () => {
             </Col>
 
             {bikeList.slice(0, 6).map((item) => (
-              <CarItem item={item} key={item.id} />
+              <CarItem vehicle={item} key={item.id} />
             ))}
           </Row>
         </Container>
@@ -98,7 +98,7 @@ const Home = () => {
             </Col>
 
             {carList.slice(0, 6).map((item) => (
-              <CarItem item={item} key={item.id} />
+              <CarItem vehicle={item} key={item.id} />
             ))}
           </Row>
         </Container>

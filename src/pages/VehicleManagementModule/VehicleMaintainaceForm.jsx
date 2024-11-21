@@ -8,7 +8,7 @@ const VehicleMaintenanceForm = () => {
   const vehicle = location.state?.vehicle;
   const type = location.state?.type;
   
-  console.log(vehicle.photo)
+  console.log(vehicle.status)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     vehicleType: type,
@@ -21,6 +21,7 @@ const VehicleMaintenanceForm = () => {
     fuel_type: vehicle.fuel_type,
     photo: '',
     amount: vehicle.amount,
+    status:vehicle.status
   });
   const bufferData = new Uint8Array(vehicle.photo?.data)
   const [imageFile, setImageFile] = useState(null);
@@ -66,6 +67,7 @@ const VehicleMaintenanceForm = () => {
     data.append('type', formData.type);
     data.append('fuel_type', formData.fuel_type);
     data.append('amount', formData.amount);
+    data.append('status', formData.status);
   
     if (imageFile) {
       data.append('photo', imageFile); // Append the file directly
@@ -173,6 +175,19 @@ const VehicleMaintenanceForm = () => {
           required
         />
       </div>
+      <div>
+        <label>Status:</label>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+        >
+          {/* Explicitly list both options */}
+          <option value="available">Available</option>
+          <option value="unavailable">Unavailable</option>
+        </select>
+      </div>
+
 
       <div>
         <label>Type:</label>

@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/booking-form.css";
 import { Form, FormGroup } from "reactstrap";
 
-const BookingForm = () => {
+const BookingForm = ({vendor, registration_no}) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  // console.log(registration_no)
+
+  const [formData, setFormData] = useState({
+    firstName: user.name.split(' ')[0],
+    lastName: user.name.split(' ')[1],
+    email: user.email,
+    phone:user.phone,
+    from_date: "",
+    to_date: "",
+    insurance:"",
+    // vendor_id:vendor.id,
+    // vehicle_id:registration_no,
+    customer_id:user.id,
+    amount:""
+  });
+
   const submitHandler = (event) => {
     event.preventDefault();
   };
