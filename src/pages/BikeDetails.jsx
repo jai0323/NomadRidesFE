@@ -49,16 +49,16 @@ const BikeDetails = () => {
   }, [registration_no]);
 
   const [formData, setFormData] = useState({
-    firstName: user.name.split(' ')[0],
-    lastName: user.name.split(' ')[1],
-    email: user.email,
-    phone:user.phone,
+    firstName: user?.name.split(' ')[0],
+    lastName: user?.name.split(' ')[1],
+    email: user?.email,
+    phone:user?.phone,
     from_date: "",
     to_date: "",
     insurance:"",
     vendor_id:vendor?.id,
     vehicle_id:registration_no,
-    customer_id:user.id,
+    customer_id:user?.id,
     amount:"",
     payment_method:"",
     vehicle_type:'bike',

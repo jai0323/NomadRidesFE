@@ -1,6 +1,7 @@
 import React ,{useState}from "react";
 import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const FindCarForm = () => {
   const [vehicleType, setVehicleType] = useState('car');
@@ -49,8 +50,8 @@ const FindCarForm = () => {
         </FormGroup>
 
         <FormGroup className="form__group">
-          <button type="submit" className="btn find__car-btn">
-            {vehicleType === 'car' ? 'Find Car' : 'Find Bike'}</button>
+          <Link to={`/${vehicleType}s`} type="submit" className="btn find__car-btn">
+            {vehicleType === 'car' ? 'Find Car' : 'Find Bike'}</Link>
         </FormGroup>
       </div>
     </Form>

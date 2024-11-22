@@ -15,6 +15,7 @@ import Testimonial from "../components/UI/Testimonial";
 import BlogList from "../components/UI/BlogList";
 import { vehicleList } from "../util/api";
 import { useNavigate } from "react-router-dom";
+import BikeItem from "../components/UI/BikeItem";
 
 
 
@@ -82,8 +83,8 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {bikeList.slice(0, 6).map((item) => (
-              <CarItem vehicle={item} key={item.id} />
+            {bikeList.slice(4, 10).map((item) => (
+              <BikeItem vehicle={item} key={item.id} />
             ))}
           </Row>
         </Container>

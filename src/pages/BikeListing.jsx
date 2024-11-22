@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import BikeItem from "../components/UI/BikeItem";
 import bikeData from "../assets/data/bikeData";
+import { useNavigate } from "react-router-dom";
+import { vehicleList } from "../util/api";
 
 const BikeListing = () => {
+  const navigate = useNavigate();
+  const [carList, setCarList] = useState([]);
+  const [bikeList, setBikeList] = useState([]);
+
+  const fetchData = async () => {
+    const response1 = await vehicleList();
+    setBikeList(response1?.listofbike || []);
+    // setCarList(response1?.listofcar || []);
+    // console.log(response1?.listofbike)
+  };
+  
+  
+  useEffect(()=>{
+  
+    fetchData();
+  },[]);
+
+
   return (
     <Helmet title="Bikes">
       <CommonSection title="Bike Listing" />
@@ -27,8 +47,8 @@ const BikeListing = () => {
               </div>
             </Col>
 
-            {bikeData.map((item) => (
-              <BikeItem item={item} key={item.id} />
+            {bikeList.map((item) => (
+              <BikeItem vehicle={item} key={item.id} />
             ))}
           </Row>
         </Container>

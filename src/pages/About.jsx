@@ -32,17 +32,11 @@ const About = () => {
                 </h2>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                We differentiate ourselves by offering a range of exceptional services designed to provide a seamless and trustworthy experience for our customers. Our offerings include access to the vehicle's maintenance history, along with recent photos and videos of the vehicle to ensure transparency. We also provide user reviews from the vehicle's last trip to help you make informed decisions.
                 </p>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                Every journey begins with a full fuel tank, and our services include insurance coverage for accidents and damages for your peace of mind. Unlike others, we require no security deposit or original document submission, making the process hassle-free. Additionally, we offer the best deals and flexible subscription plans to suit your needs.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
@@ -52,7 +46,7 @@ const About = () => {
 
                   <div>
                     <h6 className="section__subtitle">Need Any Help?</h6>
-                    <h4>+00123456789</h4>
+                    <h4>+91-9927155685</h4>
                   </div>
                 </div>
               </div>
@@ -68,7 +62,7 @@ const About = () => {
           <Row>
             <Col lg="12" className="mb-5 text-center">
               <h6 className="section__subtitle">Experts</h6>
-              <h2 className="section__title">Our Members</h2>
+              <h2 className="section__title">Our Team Members</h2>
             </Col>
             <OurMembers />
           </Row>

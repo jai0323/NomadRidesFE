@@ -21,26 +21,26 @@ const CarItem = ({vehicle}) => {
           <h6 className="rent__price text-center mt-">
           ₹{vehicle.amount}.00 <span>/ Day</span>
           </h6>
-
+          <div className={`${vehicle?.status=='available'?'text-green-500':'text-red-600'} font-medium text-center`}>{vehicle.status.toUpperCase()}</div>
           <div className="car__item-info d-flex align-items-center justify-content-between mt-3 mb-4">
             <span className=" d-flex align-items-center gap-1">
-              <i class="ri-car-line"></i> {vehicle.model}
+              <i class="ri-car-line"></i> {(vehicle.brand +"  " + vehicle.model).slice(0,20)}
             </span>
             <span className=" d-flex align-items-center gap-1">
-              <i class="ri-settings-2-line"></i> {}
+              <i class="ri-settings-2-line"></i> {vehicle.fuel_type}
             </span>
             <span className=" d-flex align-items-center gap-1">
-              <i class="ri-timer-flash-line"></i> {}
+              <i class="ri-timer-flash-line"></i> {vehicle.type}
             </span>
           </div>
 
           <button className=" w-50 car__item-btn car__btn-rent">
-            <Link to={`/bikes/${vehicle.registration_no}`}>Rent
+            <Link to={`/cars/${vehicle.registration_no}`}>Rent
             </Link>
           </button>
 
           <button className=" w-50 car__item-btn car__btn-details">
-            <Link to={`/bikes/${vehicle.registration_no}`}>Details</Link>
+            <Link to={`/cars/${vehicle.registration_no}`}>Details</Link>
           </button>
         </div>
       </div>
