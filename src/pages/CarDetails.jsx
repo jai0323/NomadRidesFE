@@ -72,6 +72,11 @@ const CarDetails = () => {
 
   const submitHandler = async(event) => {
     event.preventDefault();
+    if(user?.type != 'customer'){
+      alert('Login as customer to book the vehicle');
+      navigate('/login')
+      return;
+    }
     const response = await booking(formData);
     alert(response.message);
     if(response.message=="Booking completed successfully"){
@@ -146,7 +151,7 @@ const CarDetails = () => {
 
                 <div className="d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${vehicle?.amount?.toFixed(2)} / Day
+                  ₹{vehicle?.amount?.toFixed(2)} / Day
                   </h6>
 
                   <span className="d-flex align-items-center gap-2">
@@ -157,7 +162,7 @@ const CarDetails = () => {
                       <i className="ri-star-s-fill"></i>
                       <i className="ri-star-s-fill"></i>
                     </span>
-                    ({vehicle?.rating || 0} ratings)
+                    {vehicle?.rating } rating
                   </span>
                 </div>
 
@@ -175,10 +180,16 @@ const CarDetails = () => {
                     <i className="ri-timer-flash-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
                     <span className="text-xl text-black">{vehicle?.fuel_type || 'N/A'}</span>
                   </span>
+
+                  <span className="d-flex align-items-center gap-1 section__description">
+                    <i className="ri-bike-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
+                    <span className="text-xl text-black">{vehicle?.type || 'N/A'}</span>
+                  </span>
+
                 </div>
                 <p className="flex flex-col my-5 gap-3 text-lg">
                   <span>Vendor Name : {vendor?.name}</span>
-                  <span>Address  : {vendor?.name}</span>
+                  <span>Address  : {vendor?.address}, {vendor?.city}</span>
                   <span>Phone : +91-{vendor?.phone}</span>
                   <span>Email : {vendor?.email}</span>
                   <span >Vehicle Status : <span className={`${vehicle?.status=='available'?'text-green-500':'text-red-600'} font-semibold`}>{vehicle?.status.toUpperCase()}</span></span>

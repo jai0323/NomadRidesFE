@@ -27,6 +27,10 @@ const navLinks = [
     display: "Blog",
   },
   {
+    path: "/booking",
+    display: "Bookings",
+  },
+  {
     path: "/contact",
     display: "Contact",
   },
@@ -90,9 +94,9 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                  <Link to="/pup" className="d-flex align-items-center gap-1">
+                  {/* <Link to="/pup" className="d-flex align-items-center gap-1">
                     <i className="ri-login-circle-line"></i> Admin
-                  </Link>
+                  </Link> */}
                   <Link to="/login" className="d-flex align-items-center gap-1">
                     <i className="ri-login-circle-line"></i> Login
                   </Link>

@@ -149,7 +149,7 @@ const BikeDetails = () => {
 
                 <div className="d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${vehicle?.amount?.toFixed(2)} / Day
+                  ₹{vehicle?.amount?.toFixed(2)} / Day
                   </h6>
 
                   <span className="d-flex align-items-center gap-2">
@@ -160,7 +160,7 @@ const BikeDetails = () => {
                       <i className="ri-star-s-fill"></i>
                       <i className="ri-star-s-fill"></i>
                     </span>
-                    ({vehicle?.rating || 0} ratings)
+                    {vehicle?.rating } rating
                   </span>
                 </div>
 
@@ -169,7 +169,7 @@ const BikeDetails = () => {
                   style={{ columnGap: "4rem" }}
                 >
                   <span className="d-flex text-xl align-items-center gap-1 section__description">
-                    <i className="ri-roadster-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
+                    <i className="ri-motorbike-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
                     <span className="text-xl text-black">{vehicle?.brand || 'N/A'}</span>
                     <span className="text-xl text-black px-2">{vehicle?.model || 'N/A'}</span>
                   </span>
@@ -178,10 +178,14 @@ const BikeDetails = () => {
                     <i className="ri-timer-flash-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
                     <span className="text-xl text-black">{vehicle?.fuel_type || 'N/A'}</span>
                   </span>
+                  <span className="d-flex align-items-center gap-1 section__description">
+                    <i className="ri-bike-line text-xl" style={{ color: "#f9a826" }}></i>{" "}
+                    <span className="text-xl text-black">{vehicle?.type || 'N/A'}</span>
+                  </span>
                 </div>
                 <p className="flex flex-col my-5 gap-3 text-lg">
                   <span>Vendor Name : {vendor?.name}</span>
-                  <span>Address  : {vendor?.name}</span>
+                  <span>Address  : {vendor?.address}, {vendor?.city}</span>
                   <span>Phone : +91-{vendor?.phone}</span>
                   <span>Email : {vendor?.email}</span>
                   <span >Vehicle Status : <span className={`${vehicle?.status=='available'?'text-green-500':'text-red-600'} font-semibold`}>{vehicle?.status.toUpperCase()}</span></span>

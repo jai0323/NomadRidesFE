@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/vehicle-maintenance.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { Buffer } from 'buffer';
-import { updateVehicle } from "../../util/api";
+import { deleteVehicle, updateVehicle } from "../../util/api";
 const VehicleMaintenanceForm = () => {
   const location = useLocation();
   const vehicle = location.state?.vehicle;
@@ -89,9 +89,30 @@ const VehicleMaintenanceForm = () => {
   };
   
 
-  const handleBackButton=({vehicle})=>{
+  const handleBackButton=()=>{
    navigate("/vendor");
   }
+
+
+
+  const handleDeleteButton = async (e) => {
+    e.preventDefault(); // Prevent the form from being submitted
+    try {
+      const response = await deleteVehicle(vehicle.registration_no, type);
+      if (response.status === "deleted") {
+        alert("Vehicle deleted successfully");
+        navigate("/vendor");
+      } else {
+        alert("Failed to delete the vehicle. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting vehicle:", error);
+      alert("An error occurred while deleting the vehicle.");
+    }
+  };
+  
+
+
   return (
     <form onSubmit={handleSubmit} className="vehicle-registration-form">
       <h2>Vehicle Details From</h2>
@@ -261,6 +282,7 @@ const VehicleMaintenanceForm = () => {
 
       <div className="button-container">
       <button type="submit" className="submit-bnt">Update details</button>
+      <button type="button" onClick={handleDeleteButton} className="delete-bnt">Delete vehicle</button>
       <button  onClick={handleBackButton} className="back-bnt">Back</button>
       </div>
     </form>

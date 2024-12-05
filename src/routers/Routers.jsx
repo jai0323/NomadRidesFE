@@ -21,6 +21,7 @@ import VehicleInspectionForm from '../pages/VehicleManagementModule/VehicleInspe
 import VehicleAvailabilityForm from '../pages/VehicleManagementModule/VehicleAvailabilityForm'
 import ProfileUpdatePage from '../pages/ProfileUpdatePage'
 import VendorPage from '../pages/VendorPage'
+import Bookings from '../pages/Bookings'
 const Routers = () => {
   return (
     <Routes>
@@ -45,6 +46,7 @@ const Routers = () => {
         <Route path='/vif' element={<VehicleInspectionForm/>}/>
         <Route path='/vaf' element={<VehicleAvailabilityForm/>}/>
         <Route path='/pup' element={<ProfileUpdatePage/>}/>
+        <Route path='/booking' element={<Bookings/>}/>
         <Route path='*' element={<NotFound/>}/>
         
     </Routes>

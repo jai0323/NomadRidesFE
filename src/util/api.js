@@ -62,6 +62,32 @@ export async function booking( formData ) {
 }
 
 
+//delete vehicle
+export async function deleteVehicle( id,type ) {
+    console.log(id,"--")
+    try {
+        const response = await axios.post(`${BACKEND_URL}/deleteVehicle`, {id,type});
+        return response.data;
+    } catch (err) {
+        console.log("api log 20:=",err.response.data.error);
+        return err.response.data;
+    }
+}
+
+
+//Get bookings customer
+export async function fetchBooking( id ) {
+    console.log(id,"--")
+    try {
+        const response = await axios.post(`${BACKEND_URL}/bookings`, {id});
+        return response.data;
+    } catch (err) {
+        console.log("api log  bookings:=",err.response.data.error);
+        return err.response.data;
+    }
+}
+
+
 //----------------------------------------------- VENDOR API's ---------------------------------------------------------
 
 //Vendor Signup API
